@@ -118,4 +118,12 @@
                 success: function (json) {
 
                     // access the conversion result in json.result
-        
+                    console.log(json.result);
+                    // return json.result
+
+                }
+
+            });
+        }
+    </script>
+    @endsection
