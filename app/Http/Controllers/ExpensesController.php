@@ -10,15 +10,14 @@ class ExpensesController extends Controller
 {
     public function index(){
         $all_expenses = Expenses::paginate(10);
-//        $all_expenses->paginate(5);
-//        dd($all_expenses);
         return view('Expenses.index',compact('all_expenses'));
     }
 
     public function store(Request $request){
        $expenses = new Expenses;
+//       dd($request->expense);
        $request->vat = (int)$request->vat;
-        if(strpos("EUR", $request->expense) !== false){
+        if(strpos($request->expense, "EUR") !== false){
             $req_url = 'https://api.exchangerate-api.com/v4/latest/EUR';
             $response_json = file_get_contents($req_url);
 
@@ -32,7 +31,7 @@ class ExpensesController extends Controller
                     // YOUR APPLICATION CODE HERE, e.g.
                     $base_price = (int)$request->expense; // Your price in USD
                     $GBP_price = round(($base_price * $response_object->rates->GBP), 2);
-                    $GBP_price = $GBP_price . 'Pounds';
+                    $GBP_price = $GBP_price . ' Pounds';
                     $expenses->create([
                         'expense' => $GBP_price,
                         'vat' => $request->vat,

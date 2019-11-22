@@ -94,17 +94,23 @@
         var vat= parseInt($("#vat").val());
         var output= $("#expense");
         $("#expense_input").keyup(function() {
-            // if($(this).val().indexOf('EUR') > -1){
-            //     console.log('exists');
-            //     let amount = parseFloat($(this).val());
-            //     let result = convert('EUR','GBP',amount);
-            //     $(this).val(result)
-            // }
-            var value = parseFloat($(this).val());
-            let result = value * (vat /100);
-            result = value + result;
-            result = formatNumber(result);
-            output.val(result)
+            if($(this).val().indexOf('EUR') > -1){
+                var value = parseFloat($(this).val());
+                let result = value * (vat /100);
+                result = value + result;
+                result = formatNumber(result);
+                output.val(result)
+                let final = output.val() + " EUR "
+                output.val(final)
+            }
+            else{
+                var value = parseFloat($(this).val());
+                let result = value * (vat /100);
+                result = value + result;
+                result = formatNumber(result);
+                output.val(result)
+            }
+
 
         });
 
