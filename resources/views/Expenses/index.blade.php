@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('Layouts.app')
 @section('content')
     <div class="container-fluid">
         <h1 class="mt-4 mb-5">My Expenses </h1>
